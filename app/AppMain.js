@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Button, Text, View} from 'react-native';
 
 import {testLog} from './redux/actions/index.actions';
+import {TEST_INC_COUNTER} from './redux/actions/index.actions';
 
 
 import {connect} from 'react-redux';
@@ -66,6 +67,14 @@ class AppMain extends Component {
     this.setState({});  // update the current state
   }
 
+
+  onPressIncreaseCounter = () => {
+    this.props.dispatch(
+      {type : TEST_INC_COUNTER, payload:{}} 
+    );
+
+  }
+
   render () {
     console.log(this.props.state); // eslint-disable-line
     return (
@@ -76,11 +85,16 @@ class AppMain extends Component {
         <Text>
             { this.state.counter }
         </Text>
+        <Text>
+            { this.props.testMsg }
+        </Text>
+        <Text>
+            Counter: { this.props.testCounter }
+        </Text>
         <Button title="Test+1" onPress={this.onPress1} />
         <Button title="Test-1" onPress={this.onPress2} />
         <Button title="TestAction" onPress={this.onPressTestAction} />
-      
-
+        <Button title="IncCounter" onPress={this.onPressIncreaseCounter} />
       </View>
     );
   }
@@ -107,13 +121,21 @@ const styles = StyleSheet.create({
   });
 
 // Setup the connection 
-const mapStateToProps = (state) => ({
-  state
-});
 
+// Mapping State to Props
+const mapStateToProps = (state) => {
+  return {
+    state : state,              // Full State 
+    testMsg : state.test.msg,    // Message 
+    testCounter : state.test.counter
+  }
+};
+
+// Mapping Dispatcher to Props
 const mapDispatchToProps = (dispatch) => {
   return {
-    test: (msg) => {      // This create this.props.test
+    dispatch : dispatch, 
+    test: (msg) => {      // This create this.props.test('some message');
       dispatch(testLog(msg))
     }
   }

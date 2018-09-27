@@ -1,12 +1,22 @@
 
-import {TEST_ACTION} from '../actions/index.actions';
+import {TEST_ACTION, TEST_INC_COUNTER} from '../actions/index.actions';
 
-const test = (state = {"test":""}, action) => {      // the state 'test' managed by this reducer
+const test = (state = {"msg":""}, action) => {      // the state 'test' managed by this reducer
     switch (action.type) {
         case TEST_ACTION: {
             console.log("MSG: " + action.payload);
             return {"msg" : action.payload};
         }
+
+        case TEST_INC_COUNTER: {
+            var newCount = state.counter;
+            if(newCount == undefined)  newCount = 1;
+
+            newCount++;
+
+            return {"counter" : newCount};
+        }
+
         default:
             return state;
     }
