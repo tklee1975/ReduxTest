@@ -5,7 +5,7 @@ const test = (state = {"msg":""}, action) => {      // the state 'test' managed 
     switch (action.type) {
         case TEST_ACTION: {
             console.log("MSG: " + action.payload);
-            return {"msg" : action.payload};
+            return {...state, "msg" : action.payload};
         }
 
         case TEST_INC_COUNTER: {
@@ -14,7 +14,7 @@ const test = (state = {"msg":""}, action) => {      // the state 'test' managed 
 
             newCount++;
 
-            return {"counter" : newCount};
+            return {...state, "counter" : newCount};
         }
 
         default:

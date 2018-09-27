@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 //import Home from './components/Home/Home.component';
 import {StyleSheet, Button, Text, View} from 'react-native';
 
-import {testLog} from './redux/actions/index.actions';
-import {TEST_INC_COUNTER} from './redux/actions/index.actions';
+import {testLog} from './actions/index.actions';
+import {TEST_INC_COUNTER} from './actions/index.actions';
 
 
 import {connect} from 'react-redux';
 
-class AppMain extends Component {
+class TestRedux extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -142,4 +142,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 // Export for usage 
-export default connect(mapStateToProps, mapDispatchToProps)(AppMain);
+export default connect(mapStateToProps, mapDispatchToProps)(TestRedux);

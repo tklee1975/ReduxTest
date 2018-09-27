@@ -10,7 +10,7 @@ import React, {Component} from 'react';
 import {initStore} from './app/redux/store';
 import {Provider} from 'react-redux';
 
-import AppMain from './app/AppMain';
+import AppMain from './app/redux/TestRedux';
 
 const store = initStore();
 //const store = {};     // this will be bug!
