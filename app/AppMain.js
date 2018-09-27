@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 //import Home from './components/Home/Home.component';
 import {StyleSheet, Button, Text, View} from 'react-native';
 
-import {TEST_ACTION} from './redux/actions/index.actions';
+import {testLog} from './redux/actions/index.actions';
+
 
 import {connect} from 'react-redux';
 
@@ -48,11 +49,21 @@ class AppMain extends Component {
     console.log("core state" + JSON.stringify(this.props.state));
   }
 
+  incCounter = () => {
+    this.setState( { "counter" : this.state.counter+1});
+  }
+
   onPressTestAction = () => {
     console.log("onPressTestAction is pressed");
+
+    this.incCounter();
+
+    this.props.test("testing_" + this.state.counter); // See const mapDispatchToProps = (dispatch) => {
     //this.props.dispatch()
   
-    dispatch(TEST_ACTION);
+    //dispatch(TEST_ACTION);
+    console.log("core state" + JSON.stringify(this.props.state));
+    this.setState({});  // update the current state
   }
 
   render () {
@@ -100,9 +111,13 @@ const mapStateToProps = (state) => ({
   state
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch
-});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    test: (msg) => {      // This create this.props.test
+      dispatch(testLog(msg))
+    }
+  }
+};
 
 // Export for usage 
 export default connect(mapStateToProps, mapDispatchToProps)(AppMain);
